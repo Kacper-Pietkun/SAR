@@ -2,7 +2,7 @@ name: Run Examples
 
 on:
   pull_request:
-     branches: [main, actions_examples]
+     branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -32,9 +32,13 @@ jobs:
         run: |
           mkdir ~/datasets
           mkdir ~/partitioned_data
+          print("***************")
           ls
+          print("***************")
           pwd
+          print("***************")
           ls ~
+          print("***************")
           ls $GITHUB_WORKSPACE
           # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name cora --partition-out-path ~/partitioned_data/cora  --num-partitions 3
           # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name reddit --partition-out-path ~/partitioned_data/reddit  --num-partitions 3
