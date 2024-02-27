@@ -2,7 +2,7 @@ name: Run Examples
 
 on:
   pull_request:
-     branches: [main]
+     branches: [main, actions_examples]
   workflow_dispatch:
 
 jobs:
