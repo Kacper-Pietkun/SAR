@@ -41,5 +41,5 @@ jobs:
         run: |
           python $GITHUB_WORKSPACE/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/train_homogeneous_graph_basic.py \
                                                                   --timeout 5*60 \
-                                                                  --script-args '--partitioning-json-file examples/partition_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ${GITHUB_WORKSPACE}/examples/ip_file --backend ccl' \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl' \
                                                                   --world-size 3
