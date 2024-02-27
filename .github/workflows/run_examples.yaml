@@ -32,20 +32,14 @@ jobs:
         run: |
           mkdir ~/datasets
           mkdir ~/partitioned_data
-          echo "***************"
-          ls
-          echo "***************"
-          pwd
-          echo "***************"
-          ls ~
-          echo "***************"
-          ls $GITHUB_WORKSPACE
-          # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name cora --partition-out-path ~/partitioned_data/cora  --num-partitions 3
-          # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name reddit --partition-out-path ~/partitioned_data/reddit  --num-partitions 3
-          # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name ogbn-mag --partition-out-path ~/partitioned_data/ogbn_mag  --num-partitions 3
-          # python examples/partition_graph.py --dataset-root ~/datasets --dataset-name ogbn-arxiv --partition-out-path ~/partitioned_data/ogbn_arxiv  --num-partitions 3
+          python $GITHUB_WORKSPACE/examples/partition_graph.py --dataset-root ~/datasets --dataset-name cora --partition-out-path ~/partitioned_data/cora --num-partitions 3
+          # python $GITHUB_WORKSPACE/examples/partition_graph.py --dataset-root ~/datasets --dataset-name reddit --partition-out-path ~/partitioned_data/reddit --num-partitions 3
+          # python $GITHUB_WORKSPACE/examples/partition_graph.py --dataset-root ~/datasets --dataset-name ogbn-mag --partition-out-path ~/partitioned_data/ogbn_mag --num-partitions 3
+          python $GITHUB_WORKSPACE/examples/partition_graph.py --dataset-root ~/datasets --dataset-name ogbn-arxiv --partition-out-path ~/partitioned_data/ogbn_arxiv --num-partitions 3
 
-      - name: 
+      - name: Homogenoeous Basic
         run: |
-          set +e
-          python -m pytest tests/ -sv
+          python $GITHUB_WORKSPACE/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/train_homogeneous_graph_basic.py \
+                                                                  --timeout 5*60 \
+                                                                  --script-args '--partitioning-json-file examples/partition_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ${GITHUB_WORKSPACE}/examples/ip_file --backend ccl' \
+                                                                  --world-size 3
