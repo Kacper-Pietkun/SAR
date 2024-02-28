@@ -81,5 +81,5 @@ jobs:
         run: |
           python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/correct_and_smooth.py \
                                                                   --timeout 300 \
-                                                                  --script-args '--partitioning-json-file ~/partitioned_data/reddit/reddit.json --ip-file ~/ip_file --backend ccl --num-epochs 10' \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/reddit/reddit.json --ip-file ~/ip_file --backend ccl --num-epochs 11' \
                                                                   --world-size 3
