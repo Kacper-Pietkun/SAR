@@ -51,3 +51,35 @@ jobs:
                                                                   --timeout 300 \
                                                                   --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl --cpu-run --train-iters 10' \
                                                                   --world-size 3
+      
+      - name: Homogenoeous Advanced (MFG)
+        if: always()
+        run: |
+          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/train_homogeneous_graph_advanced.py \
+                                                                  --timeout 300 \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl --construct-mfgs --cpu-run --train-iters 10' \
+                                                                  --world-size 3
+
+      - name: APPNP
+        if: always()
+        run: |
+          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/train_dist_appnp_with_sar.py \
+                                                                  --timeout 300 \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl --cpu-run --train-iters 10' \
+                                                                  --world-size 3
+                                                                
+      - name: Correct and Smooth
+        if: always()
+        run: |
+          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/correct_and_smooth.py \
+                                                                  --timeout 300 \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl --cpu-run --epochs 10 --model linear --dropout 0.5 --correction-alpha 0.87 --smoothing-alpha 0.81 --correction-adj AD --autoscale' \
+                                                                  --world-size 3
+
+      - name: SIGN
+        if: always()
+        run: |
+          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/correct_and_smooth.py \
+                                                                  --timeout 300 \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/reddit/reddit.json --ip-file ~/ip_file --backend ccl --num-epochs 10' \
+                                                                  --world-size 3
