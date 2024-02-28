@@ -14,6 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: "Delete later"
+        uses: actions/checkout@v3
+        with:
+          ref: 'action_examples'
+          path: 'xd/'
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -33,6 +39,14 @@ jobs:
         run: |
           mkdir ~/datasets
           mkdir ~/partitioned_data
+          echo "*******"
+          ls
+          echo "*******"
+          ls ~
+          echo "*******"
+          ls cd
+          echo "*******"
+          ls cd/.github
           echo "*******"
           ls $GITHUB_WORKSPACE
           echo "*******"
