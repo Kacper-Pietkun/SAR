@@ -206,7 +206,7 @@ def main():
         optimizer.step()
         train_time = time.time() - t_1
 
-        if (train_iter_idx + 1) % 10 == 0:
+        if (train_iter_idx + 1) % 1 == 0:
             train_acc, val_acc, test_acc = evaluate(gnn_model, features, labels, masks)
 
             result_message = (

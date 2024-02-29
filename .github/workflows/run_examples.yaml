@@ -65,7 +65,7 @@ jobs:
         run: |
           python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/train_dist_appnp_with_sar.py \
                                                                   --timeout 300 \
-                                                                  --script-args '--partitioning-json-file ~/partitioned_data/ogbn_arxiv/ogbn-arxiv.json --ip-file ~/ip_file --backend ccl --cpu-run --train-iters 10' \
+                                                                  --script-args '--partitioning-json-file ~/partitioned_data/reddit/reddit.json --ip-file ~/ip_file --backend ccl --cpu-run --train-iters 2' \
                                                                   --world-size 3
                                                                 
       - name: Correct and Smooth
@@ -79,7 +79,7 @@ jobs:
       - name: SIGN
         if: always()
         run: |
-          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/correct_and_smooth.py \
+          python xd/.github/utils/simulate_env.py  --script-path $GITHUB_WORKSPACE/examples/SIGN/train_sign_with_sar.py \
                                                                   --timeout 300 \
                                                                   --script-args '--partitioning-json-file ~/partitioned_data/reddit/reddit.json --ip-file ~/ip_file --backend ccl --num-epochs 11' \
                                                                   --world-size 3
