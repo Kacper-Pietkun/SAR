@@ -27,9 +27,15 @@ def run_script(parsed_command):
 def wait_for_it(proccesses, timeout):
     try:
         proccesses[0].wait(timeout=timeout)
-    except:
+    except subprocess.TimeoutExpired:
         for p in proccesses:
             p.kill()
+        raise RuntimeError("Script didn't finish - timeout mechanism was triggered")
+
+    for p in proccesses:
+        p.wait()
+        if p.returncode != 0:
+            raise RuntimeError(f"There has been an exception in the runned script - return code: {p.returncode}")
      
 
 def parse_command(script_path, script_args, rank, world_size):
